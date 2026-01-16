@@ -23,8 +23,8 @@ WORKDIR /app
 # Copiar package files
 COPY package*.json ./
 
-# Instalar dependencias de producción
-RUN npm ci --only=production
+# Instalar TODAS las dependencias (necesarias para el servidor)
+RUN npm ci
 
 # Copiar el build de Vite y el servidor desde el builder
 COPY --from=builder /app/dist ./dist
