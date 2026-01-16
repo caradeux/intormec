@@ -7,10 +7,9 @@ WORKDIR /app
 COPY package*.json ./
 
 # Instalar TODAS las dependencias (incluyendo devDependencies)
-# Ignorar NODE_ENV durante la instalación
 RUN npm ci --include=dev
 
-# Copiar el resto del código
+# Copiar el resto del código (incluyendo server.js)
 COPY . .
 
 # Build de la aplicación
@@ -27,9 +26,9 @@ COPY package*.json ./
 # Instalar dependencias de producción
 RUN npm ci --only=production
 
-# Copiar el build de Vite y el servidor
+# Copiar el build de Vite y el servidor desde el builder
 COPY --from=builder /app/dist ./dist
-COPY server.js ./
+COPY --from=builder /app/server.js ./server.js
 
 # Exponer puerto 3000
 EXPOSE 3000
