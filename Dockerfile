@@ -6,8 +6,9 @@ WORKDIR /app
 # Copiar archivos de dependencias
 COPY package*.json ./
 
-# Instalar dependencias
-RUN npm ci
+# Instalar TODAS las dependencias (incluyendo devDependencies)
+# Ignorar NODE_ENV durante la instalación
+RUN npm ci --include=dev
 
 # Copiar el resto del código
 COPY . .
