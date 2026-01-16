@@ -1,0 +1,23 @@
+# robots.txt para INTORMEC
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://intormec.cl/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1
+
+# Directorios permitidos
+Allow: /src/
+Allow: /assets/
+
+# Optimización para buscadores
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /

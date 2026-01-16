@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Menu, X, Phone } from 'lucide-react';
-import Hero from './components/Hero';
+import HeroSlider from './components/HeroSlider';
 import Services from './components/Services';
+import Gallery from './components/Gallery';
 import About from './components/About';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -33,6 +34,9 @@ function App() {
               </button>
               <button onClick={() => scrollToSection('servicios')} className="hover:text-orange-500 transition">
                 Servicios
+              </button>
+              <button onClick={() => scrollToSection('galeria')} className="hover:text-orange-500 transition">
+                Galería
               </button>
               <button onClick={() => scrollToSection('nosotros')} className="hover:text-orange-500 transition">
                 Nosotros
@@ -71,6 +75,12 @@ function App() {
                 Servicios
               </button>
               <button
+                onClick={() => scrollToSection('galeria')}
+                className="block w-full text-left px-4 py-2 hover:bg-slate-700 rounded transition"
+              >
+                Galería
+              </button>
+              <button
                 onClick={() => scrollToSection('nosotros')}
                 className="block w-full text-left px-4 py-2 hover:bg-slate-700 rounded transition"
               >
@@ -95,8 +105,9 @@ function App() {
       </nav>
 
       <main className="pt-20">
-        <Hero scrollToSection={scrollToSection} />
+        <HeroSlider scrollToSection={scrollToSection} />
         <Services />
+        <Gallery />
         <About />
         <Contact />
       </main>

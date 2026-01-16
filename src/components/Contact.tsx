@@ -199,13 +199,13 @@ const Contact: React.FC = () => {
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition"
                   >
                     <option value="">Seleccionar servicio...</option>
+                    <option value="obras-civiles">Obras Civiles Menores</option>
+                    <option value="terminacion">Terminación y Acabado</option>
+                    <option value="limpieza-terrenos">Limpieza de Terrenos</option>
+                    <option value="productos-metalicos">Productos Metálicos</option>
+                    <option value="vehiculos">Mantención de Vehículos</option>
                     <option value="maestranza">Maestranza</option>
-                    <option value="mecanica">Mecánica</option>
-                    <option value="arenado">Arenado</option>
-                    <option value="torneria">Tornería</option>
-                    <option value="mantencion">Mantención</option>
-                    <option value="repuestos">Repuestos</option>
-                    <option value="capacitaciones">Capacitaciones</option>
+                    <option value="otros">Otros Servicios</option>
                   </select>
                 </div>
 
