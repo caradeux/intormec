@@ -52,7 +52,7 @@ const HeroSlider: React.FC<HeroSliderProps> = ({ scrollToSection }) => {
     if (!isPaused) {
       const interval = setInterval(() => {
         setCurrentSlide((prev) => (prev + 1) % slides.length);
-      }, 5000);
+      }, 6000); // Cambiado a 6 segundos para mejor visualización
       return () => clearInterval(interval);
     }
   }, [isPaused, slides.length]);
@@ -133,8 +133,8 @@ const HeroSlider: React.FC<HeroSliderProps> = ({ scrollToSection }) => {
             Desde 2013 especializados en obras civiles menores, terminación de edificios, limpieza de terrenos y fabricación de productos metálicos en Puchuncaví, Región de Valparaíso.
           </p>
 
-          {/* Indicadores de slides */}
-          <div className="flex space-x-3 mb-4">
+          {/* Indicadores de slides - Movidos más arriba */}
+          <div className="flex space-x-3 mb-8">
             {slides.map((_, index) => (
               <button
                 key={index}
@@ -150,33 +150,35 @@ const HeroSlider: React.FC<HeroSliderProps> = ({ scrollToSection }) => {
           </div>
         </div>
 
-        {/* Controles del slider */}
-        <button
-          onClick={prevSlide}
-          className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-3 rounded-full transition-all duration-300 backdrop-blur-sm z-20"
-          aria-label="Slide anterior"
-        >
-          <ChevronLeft size={32} />
-        </button>
-        <button
-          onClick={nextSlide}
-          className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-3 rounded-full transition-all duration-300 backdrop-blur-sm z-20"
-          aria-label="Slide siguiente"
-        >
-          <ChevronRight size={32} />
-        </button>
+        {/* Controles del slider - Posicionados abajo para no tapar texto */}
+        <div className="absolute bottom-20 left-0 right-0 flex justify-center gap-4 z-20">
+          <button
+            onClick={prevSlide}
+            className="bg-black/50 hover:bg-orange-600 text-white p-3 rounded-full transition-all duration-300 backdrop-blur-sm"
+            aria-label="Slide anterior"
+          >
+            <ChevronLeft size={28} />
+          </button>
+          <button
+            onClick={nextSlide}
+            className="bg-black/50 hover:bg-orange-600 text-white p-3 rounded-full transition-all duration-300 backdrop-blur-sm"
+            aria-label="Slide siguiente"
+          >
+            <ChevronRight size={28} />
+          </button>
+        </div>
 
         {/* Flecha de scroll */}
         <button
           onClick={() => scrollToSection('servicios')}
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce hover:text-orange-400 transition-colors"
+          className="absolute bottom-4 left-1/2 transform -translate-x-1/2 animate-bounce hover:text-orange-400 transition-colors"
         >
           <ArrowDown size={32} className="text-orange-500" />
         </button>
       </div>
 
-      {/* Contador de slides */}
-      <div className="absolute bottom-4 right-4 bg-black/50 text-white px-4 py-2 rounded-full text-sm backdrop-blur-sm z-20">
+      {/* Contador de slides - Reposicionado */}
+      <div className="absolute top-24 right-4 bg-black/50 text-white px-4 py-2 rounded-full text-sm backdrop-blur-sm z-20">
         {currentSlide + 1} / {slides.length}
       </div>
     </section>
