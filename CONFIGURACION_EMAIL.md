@@ -16,17 +16,19 @@ Para que el formulario de contacto funcione correctamente, debes configurar las 
 SMTP_HOST=reseller14.prodns.cl
 SMTP_PORT=465
 SMTP_USER=contacto@intormec.cl
-SMTP_PASSWORD=Intormec2026#
+SMTP_PASSWORD=[CONFIGURAR_EN_COOLIFY]
 ```
+
+**IMPORTANTE**: La contraseña SMTP debe configurarse directamente en Coolify como variable de entorno. **NUNCA** incluyas contraseñas en el código o en archivos de configuración que se suban a GitHub.
 
 ### 3. Configuración Detallada
 
-| Variable | Valor | Descripción |
-|----------|-------|-------------|
-| `SMTP_HOST` | `reseller14.prodns.cl` | Servidor SMTP del hosting |
-| `SMTP_PORT` | `465` | Puerto SMTP seguro (SSL/TLS) |
-| `SMTP_USER` | `contacto@intormec.cl` | Usuario del correo (email completo) |
-| `SMTP_PASSWORD` | `Intormec2026#` | Contraseña del correo |
+| Variable | Descripción |
+|----------|-------------|
+| `SMTP_HOST` | Servidor SMTP del hosting |
+| `SMTP_PORT` | Puerto SMTP seguro (SSL/TLS) - usar 465 |
+| `SMTP_USER` | Usuario del correo (email completo) |
+| `SMTP_PASSWORD` | Contraseña del correo (configurar solo en Coolify) |
 
 ### 4. Guardar y Redesplegar
 
@@ -64,13 +66,6 @@ El correo incluye:
 - Mensaje completo
 - Fecha y hora del envío (zona horaria de Chile)
 
-### Diseño del Correo
-
-- HTML responsive con diseño profesional
-- Colores corporativos de INTORMEC (naranja y gris)
-- Versión de texto plano como fallback
-- Enlaces directos para responder o llamar
-
 ## Seguridad
 
 ### Medidas Implementadas
@@ -84,6 +79,7 @@ El correo incluye:
    - Contraseña NO está en el código fuente
    - Se configura solo en Coolify (servidor)
    - No es accesible desde el navegador
+   - **NUNCA** se sube a GitHub
 
 3. **Protección contra Spam**:
    - Rate limiting en el servidor
@@ -94,19 +90,10 @@ El correo incluye:
 
 ### El formulario no envía correos
 
-1. **Verificar variables de entorno**:
-   ```bash
-   # En Coolify, verifica que todas las variables estén configuradas
-   ```
-
-2. **Verificar logs del contenedor**:
-   ```bash
-   docker logs [container_id]
-   ```
-
-3. **Verificar conectividad SMTP**:
-   - Puerto 465 debe estar abierto
-   - Servidor SMTP debe ser accesible desde el contenedor
+1. Verificar que todas las variables de entorno estén configuradas en Coolify
+2. Verificar logs del contenedor en Coolify
+3. Verificar que el puerto 465 esté abierto
+4. Verificar que el servidor SMTP sea accesible desde el contenedor
 
 ### Los correos llegan a spam
 
@@ -116,7 +103,7 @@ El correo incluye:
 
 ### Error "Authentication failed"
 
-1. Verifica que la contraseña sea correcta
+1. Verifica que la contraseña sea correcta en Coolify
 2. Verifica que el usuario sea el email completo
 3. Verifica que la cuenta de correo esté activa
 
@@ -133,10 +120,3 @@ Estos servicios ofrecen:
 - Analytics de correos
 - Templates avanzados
 - APIs más robustas
-
-## Soporte
-
-Para cualquier problema con el sistema de correo:
-- Revisa los logs en Coolify
-- Verifica la configuración SMTP
-- Contacta al proveedor de hosting si hay problemas de conectividad
