@@ -129,31 +129,9 @@ const HeroSlider: React.FC<HeroSliderProps> = ({ scrollToSection }) => {
             </p>
           </div>
 
-          <p className="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed animate-slideInUp" style={{ animationDelay: '0.4s' }}>
+          <p className="text-lg md:text-xl text-gray-300 mb-12 leading-relaxed animate-slideInUp" style={{ animationDelay: '0.4s' }}>
             Desde 2013 especializados en obras civiles menores, terminación de edificios, limpieza de terrenos y fabricación de productos metálicos en Puchuncaví, Región de Valparaíso.
           </p>
-
-          {/* Botones de acción */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-8 animate-slideInUp" style={{ animationDelay: '0.6s' }}>
-            <button
-              onClick={() => scrollToSection('servicios')}
-              className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shine-effect"
-            >
-              Ver Servicios
-            </button>
-            <button
-              onClick={() => scrollToSection('galeria')}
-              className="bg-transparent border-2 border-white hover:bg-white hover:text-slate-900 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105"
-            >
-              Ver Proyectos
-            </button>
-            <a
-              href="tel:+56989927030"
-              className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105 text-center"
-            >
-              Llamar Ahora
-            </a>
-          </div>
 
           {/* Indicadores de slides */}
           <div className="flex space-x-3 mb-4">
