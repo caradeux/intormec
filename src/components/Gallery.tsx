@@ -10,9 +10,11 @@ const Gallery: React.FC = () => {
   useEffect(() => {
     setIsVisible(true);
     
-    // Cargar imágenes dinámicamente - Mostrando solo las primeras 24 por defecto
-    const loadImages = () => {
-      const imageList = [];
+    // Cargar imágenes dinámicamente usando import.meta.glob de Vite
+    const loadImages = async () => {
+      const imageModules = import.meta.glob('/src/imagenes/*.jpg', { eager: true, as: 'url' });
+      const imageList: Array<{src: string, alt: string, category: string}> = [];
+      
       const imageNumbers = [
         '0000', '0001', '0002', '0003', '0004', '0005', '0006', '0007', '0008', '0009',
         '0010', '0011', '0012', '0013', '0014', '0015', '0016', '0017', '0018', '0019',
@@ -27,12 +29,17 @@ const Gallery: React.FC = () => {
       ];
 
       imageNumbers.forEach((num, index) => {
-        const category = index < 25 ? 'obras-civiles' : index < 50 ? 'metalmecanica' : index < 75 ? 'vehiculos' : 'otros';
-        imageList.push({
-          src: `/src/imagenes/IMG-20260113-WA${num}.jpg`,
-          alt: `Proyecto INTORMEC - ${category}`,
-          category
-        });
+        const imagePath = `/src/imagenes/IMG-20260113-WA${num}.jpg`;
+        const imageUrl = imageModules[imagePath];
+        
+        if (imageUrl) {
+          const category = index < 25 ? 'obras-civiles' : index < 50 ? 'metalmecanica' : index < 75 ? 'vehiculos' : 'otros';
+          imageList.push({
+            src: imageUrl as string,
+            alt: `Proyecto INTORMEC - ${category}`,
+            category
+          });
+        }
       });
 
       setImages(imageList);

@@ -10,34 +10,36 @@ const HeroSlider: React.FC<HeroSliderProps> = ({ scrollToSection }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Selección de imágenes destacadas para el slider
+  // Selección de imágenes destacadas para el slider usando import.meta.glob
+  const imageModules = import.meta.glob('/src/imagenes/*.jpg', { eager: true, as: 'url' }) as Record<string, string>;
+  
   const slides = [
     {
-      image: '/src/imagenes/IMG-20260113-WA0001.jpg',
+      image: imageModules['/src/imagenes/IMG-20260113-WA0001.jpg'] || 'https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=1920',
       title: 'Obras Civiles Menores',
       subtitle: 'Limpieza de terrenos y preparación de sitios',
       category: 'Obras Civiles'
     },
     {
-      image: '/src/imagenes/IMG-20260113-WA0010.jpg',
+      image: imageModules['/src/imagenes/IMG-20260113-WA0010.jpg'] || 'https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=1920',
       title: 'Terminación de Edificios',
       subtitle: 'Acabados profesionales y reparación de techumbres',
       category: 'Construcción'
     },
     {
-      image: '/src/imagenes/IMG-20260113-WA0020.jpg',
+      image: imageModules['/src/imagenes/IMG-20260113-WA0020.jpg'] || 'https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=1920',
       title: 'Productos Metálicos',
       subtitle: 'Fabricación de estructuras metálicas a medida',
       category: 'Metalmecánica'
     },
     {
-      image: '/src/imagenes/IMG-20260113-WA0030.jpg',
+      image: imageModules['/src/imagenes/IMG-20260113-WA0030.jpg'] || 'https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=1920',
       title: 'Mantenimiento de Vehículos',
       subtitle: 'Servicio integral automotriz',
       category: 'Automotriz'
     },
     {
-      image: '/src/imagenes/IMG-20260113-WA0040.jpg',
+      image: imageModules['/src/imagenes/IMG-20260113-WA0040.jpg'] || 'https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=1920',
       title: 'Maestranza Industrial',
       subtitle: 'Reparación y mantenimiento de equipos',
       category: 'Industrial'
