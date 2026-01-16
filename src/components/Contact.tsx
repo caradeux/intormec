@@ -23,20 +23,46 @@ const Contact: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitStatus('idle');
 
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nombre: formData.name,
+          email: formData.email,
+          telefono: formData.phone,
+          servicio: formData.service,
+          mensaje: formData.message
+        }),
+      });
 
-    setSubmitStatus('success');
-    setIsSubmitting(false);
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      service: '',
-      message: ''
-    });
+      const data = await response.json();
 
-    setTimeout(() => setSubmitStatus('idle'), 5000);
+      if (response.ok && data.success) {
+        setSubmitStatus('success');
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          service: '',
+          message: ''
+        });
+        setTimeout(() => setSubmitStatus('idle'), 5000);
+      } else {
+        setSubmitStatus('error');
+        setTimeout(() => setSubmitStatus('idle'), 5000);
+      }
+    } catch (error) {
+      console.error('Error al enviar formulario:', error);
+      setSubmitStatus('error');
+      setTimeout(() => setSubmitStatus('idle'), 5000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -134,7 +160,13 @@ const Contact: React.FC = () => {
 
               {submitStatus === 'success' && (
                 <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
-                  Mensaje enviado exitosamente. Te contactaremos pronto.
+                  ✓ Mensaje enviado exitosamente. Te contactaremos pronto.
+                </div>
+              )}
+
+              {submitStatus === 'error' && (
+                <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+                  ✗ Error al enviar el mensaje. Por favor, intenta nuevamente o contáctanos por teléfono.
                 </div>
               )}
 

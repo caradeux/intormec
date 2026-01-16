@@ -16,17 +16,27 @@ COPY . .
 # Build de la aplicación
 RUN npm run build
 
-# Etapa 2: Producción con Nginx
-FROM nginx:alpine
+# Etapa 2: Producción con Node.js
+FROM node:20-alpine
 
-# Copiar archivos build
-COPY --from=builder /app/dist /usr/share/nginx/html
+WORKDIR /app
 
-# Copiar configuración de nginx
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Copiar package files
+COPY package*.json ./
+
+# Instalar dependencias de producción
+RUN npm ci --only=production
+
+# Copiar el build de Vite y el servidor
+COPY --from=builder /app/dist ./dist
+COPY server.js ./
 
 # Exponer puerto 3000
 EXPOSE 3000
 
+# Variables de entorno por defecto
+ENV NODE_ENV=production
+ENV PORT=3000
+
 # Comando de inicio
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["node", "server.js"]
